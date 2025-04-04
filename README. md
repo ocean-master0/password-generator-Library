@@ -1,7 +1,3 @@
-I understand that you want me to verify if the provided code matches the README content without making any changes or additions to the README. I'll analyze the code against the README and ensure everything aligns as described, keeping all responses in English.
-
-### Verification of Code Against README
-
 #### 1. **Features**
 The README lists the following features, and I'll check if they are implemented in the code:
 - **Generate passwords with customizable length and complexity**: Supported by `generate_password(length, difficulty)`. ✅
