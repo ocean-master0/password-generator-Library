@@ -1,0 +1,146 @@
+# Password Generator Library
+
+A Python library for generating secure, customizable passwords with multiple security features and options.
+
+## Features
+
+- Generate passwords with customizable length and complexity
+- Three difficulty levels: easy, medium, and hard
+- Include or exclude specific character types (alphabets, numbers, special characters)
+- Exclude similar-looking characters (O0, Il1, etc.) for better readability
+- Exclude ambiguous characters that might cause issues in different contexts
+- Ensure minimum counts of specific character types
+- Generate multiple passwords at once
+- Evaluate password strength (Weak, Medium, Strong)
+- Generate memorable passphrases as an alternative to passwords
+
+## Installation
+
+Install the package using pip:
+
+```bash
+pip install password_generator
+```
+
+## Basic Usage
+
+```python
+from password_generator import PasswordGenerator
+
+# Create a generator instance
+generator = PasswordGenerator()
+
+# Generate a basic password (12 characters, medium difficulty)
+password = generator.generate_password(length=12)
+print(f"Basic password: {password}")
+
+# Generate an easy password (lowercase only)
+easy_password = generator.generate_password(length=8, difficulty="easy")
+print(f"Easy password: {easy_password}")
+
+# Generate a strong password with special characters
+strong_password = generator.generate_password(
+    length=16, 
+    difficulty="hard",
+    special_chars=True
+)
+print(f"Strong password: {strong_password}")
+```
+
+## Advanced Usage
+
+```python
+from password_generator import PasswordGenerator
+
+# Create an instance first
+generator = PasswordGenerator()
+# Generate a password without similar-looking characters
+password = generator.generate_password(
+    length=12,
+    exclude_similar=True
+)
+
+# Generate a password with specific minimum character counts
+password = generator.generate_password(
+    length=16,
+    min_counts={
+        "lowercase": 3,
+        "uppercase": 3,
+        "digits": 3,
+        "special_chars": 2
+    },
+    special_chars=True
+)
+
+# Check password strength
+strength = generator.check_password_strength("MyP@ssw0rd123")
+print(f"Password strength: {strength}")
+
+# Generate multiple passwords
+passwords = generator.generate_multiple_passwords(
+    count=5,
+    length=12,
+    difficulty="medium"
+)
+
+# Generate a passphrase
+passphrase = generator.generate_passphrase(word_count=5, separator=".")
+print(f"Passphrase: {passphrase}")
+```
+
+## File Structure
+
+```
+password_generator/
+├── __init__.py        # Exports the PasswordGenerator class
+└── generator.py       # Contains the PasswordGenerator implementation
+```
+
+## API Reference
+
+### PasswordGenerator Class
+
+#### Basic Password Generation
+
+```python
+generate_password(
+    length=12,             # Length of the password
+    difficulty="medium",   # Difficulty level: "easy", "medium", or "hard"
+    numbers=True,          # Include numeric characters
+    alphabets=True,        # Include alphabetic characters
+    special_chars=False,   # Include special characters
+    exclude_similar=False, # Exclude similar-looking characters (O0Il1|)
+    exclude_ambiguous=False, # Exclude ambiguous characters
+    min_counts=None        # Dict specifying minimum counts for each character type
+)
+```
+
+#### Additional Methods
+
+```python
+# Generate multiple passwords with the same settings
+generate_multiple_passwords(count=5, **kwargs)
+
+# Evaluate password strength
+check_password_strength(password)  # Returns "Weak", "Medium", or "Strong"
+
+# Generate a passphrase
+generate_passphrase(word_count=4, separator="-")
+```
+
+## Requirements
+
+- Python 3.6 or higher
+- No external dependencies
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Author
+
+ocean-masterO
